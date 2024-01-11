@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dynamic Progress Bar Color</title>
+  <style>
+    body{
+        height: 100vh;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+    }
+
+    input::-webkit-outer-spin-button,
+        input::-webkit-inner-spin-button {
+               -webkit-appearance: none;
+                margin: 0;
+        }
+ 
+        input[type=number] {
+            -moz-appearance: textfield;
+        }
+
+    #valueInput{
+        margin-bottom: 30px;
+        width: 30px;
+        height: 30px;
+        border-width: 2px;
+        border-radius: 4px;
+        text-align: center;
+        
+    }
+
+    #applyButton{
+        background-color: rgb(182, 180, 180);
+        text-align: center;
+        border-radius: 4px;
+        margin-bottom: 30px;
+        width: 80px;
+        height: 40px;
+    }
+
+    #progress-bar {
+      width: 70%;
+      height: 50px;
+      background-color: lightgray;
+      position: relative;
+      border-radius: 10px;
+    }
+
+    #filler {
+      height: 100%;
+      width: 0;
+      overflow: hidden  ;
+      transition: width 2s ease-in-out;
+      border-radius: 10px;
+      
+    }
+  </style>
+</head>
+<body>
+  <!-- <label for="valueInput">Enter value:</label> -->
+  <input type="number" id="valueInput" />
+  <button onclick="updateProgressBar()" id="applyButton">Apply</button>
+
+  <!-- <input type="text" inputmode="numeric" placeholder="Enter number..." id="valueInput" 
+            onchange="updateProgressBar"/> -->
+  
+  <div id="progress-bar">
+    <div id="filler"></div>
+  </div>
+
+  <script>
+    function updateProgressBar() {
+      const filler = document.getElementById('filler');
+      const valueInput = document.getElementById('valueInput').value;
+
+      let progressValue = Math.min(Math.max(valueInput, 0), 100); // Ensure the value is between 0 and 100
+
+      if (progressValue <= 20) {
+        filler.style.backgroundColor = 'red';
+      } else if (progressValue > 20 && progressValue <= 70) {
+        filler.style.backgroundColor = 'yellow';
+      } else {
+        filler.style.backgroundColor = 'blue';
+      }
+
+      filler.style.width = `${progressValue}%`;
+    }
+  </script>
+</body>
+</html>
+
